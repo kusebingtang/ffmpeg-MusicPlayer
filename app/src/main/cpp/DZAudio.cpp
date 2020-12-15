@@ -45,6 +45,7 @@ int DZAudio::resampleAudio() {
                     // 调用重采样的方法
                     dataSize = swr_convert(swrContext, &resampleOutBuffer, pFrame->nb_samples,
                                            (const uint8_t **) pFrame->data, pFrame->nb_samples);
+                    dataSize = dataSize * 2 * 2;
                     LOGE("解码音频帧");
                     // write 写到缓冲区 pFrame.data -> javabyte
                     // size 是多大，装 pcm 的数据
