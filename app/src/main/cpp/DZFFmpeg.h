@@ -18,7 +18,7 @@ public:
     AVCodecContext *pCodecContext = NULL;
     SwrContext *swrContext = NULL;
     uint8_t *resampleOutBuffer = NULL;
-    const char* url = NULL;
+    char* url = NULL;
     DZJNICall *pJniCall = NULL;
 public:
     DZFFmpeg(DZJNICall *pJniCall, const char* url);
@@ -27,11 +27,11 @@ public:
 public:
     void play();
 
-    void prepare();
+    void prepare(ThreadMode threadMode);
 
     void prepareAsync();
 
-    void callPlayerJniError(int code, char* msg);
+    void callPlayerJniError(ThreadMode threadMode,int code, char* msg);
 
     void release();
 
