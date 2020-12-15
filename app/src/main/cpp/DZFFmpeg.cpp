@@ -168,4 +168,5 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
     pAudio = new DZAudio(audioStramIndex, pJniCall, pCodecContext, pFormatContext, swrContext);
     // ---------- 重采样 end ----------
     // 回调到 Java 告诉他准备好了
+    pJniCall->callPlayerPrepared(threadMode);
 }
