@@ -1,3 +1,5 @@
 # ninja log v5
 1	200	1608003790	build.ninja	a46de9ab97c6c64d
 0	5	0	clean	bdf79c03c50c7f10
+1	110	1608025120	build.ninja	a46de9ab97c6c64d
+0	7	0	clean	bdf79c03c50c7f10

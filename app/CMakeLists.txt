@@ -59,6 +59,8 @@ target_link_libraries( # Specifies the target library.
         x264
         # 链接 android ndk 自带的一些库
         android
+        # 链接 OpenSLES
+        OpenSLES
         # Links the target library to the log library
         # included in the NDK.
         log)

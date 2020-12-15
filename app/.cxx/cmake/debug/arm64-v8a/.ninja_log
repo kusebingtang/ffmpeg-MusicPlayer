@@ -1,12 +1,16 @@
 # ninja log v5
-1	68	1608008350	CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o	bfe95715d2d3ac0f
-3	332	1608008350	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
-0	404	1608008350	CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o	e9d2337851a758fd
-404	563	1608008350	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	4c19c9a8b4258cca
-2	1220	1608019472	CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o	bfe95715d2d3ac0f
-3	1298	1608019472	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
-1	1308	1608019472	CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o	e9d2337851a758fd
-1308	1900	1608019472	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	4c19c9a8b4258cca
-0	71	1608019938	CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o	bfe95715d2d3ac0f
-1	150	1608019938	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
-150	228	1608019938	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	4c19c9a8b4258cca
+3	68	1608026334	CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o	bfe95715d2d3ac0f
+4	344	1608026334	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
+1	363	1608026334	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+0	382	1608026334	CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o	e9d2337851a758fd
+382	478	1608026334	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028
+1	158	1608026380	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+158	240	1608026380	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028
+1	259	1608026428	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+259	357	1608026428	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028
+1	155	1608026483	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+155	231	1608026483	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028
+1	169	1608026497	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+169	251	1608026497	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028
+1	162	1608026775	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+162	246	1608026775	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	43114341fed27028

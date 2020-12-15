@@ -7,6 +7,12 @@
 
 {
   "directory": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/armeabi-v7a",
+  "command": "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dmusic_player_EXPORTS -I../../../../src/main/jniLibs/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o -c /Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZAudio.cpp",
+  "file": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZAudio.cpp"
+},
+
+{
+  "directory": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/armeabi-v7a",
   "command": "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=armv7-none-linux-androideabi16 --gcc-toolchain=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot  -Dmusic_player_EXPORTS -I../../../../src/main/jniLibs/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o -c /Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZJNICall.cpp",
   "file": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZJNICall.cpp"
 },

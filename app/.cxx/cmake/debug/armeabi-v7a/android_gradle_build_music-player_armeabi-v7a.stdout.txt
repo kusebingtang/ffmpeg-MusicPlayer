@@ -1,2 +1,22 @@
 ninja: Entering directory `/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/armeabi-v7a'
-[1/1] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libmusic-player.so
+[1/5] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o
+[2/5] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o
+[3/5] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o
+../../../../src/main/cpp/DZFFmpeg.cpp:112:64: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, FIND_STREAM_ERROR_CODE, "format audio stream error");
+                                                               ^
+../../../../src/main/cpp/DZFFmpeg.cpp:123:17: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+                "codec find audio decoder error");
+                ^
+../../../../src/main/cpp/DZFFmpeg.cpp:131:72: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, CODEC_ALLOC_CONTEXT_ERROR_CODE, "codec alloc context error");
+                                                                       ^
+../../../../src/main/cpp/DZFFmpeg.cpp:160:71: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
+                                                                      ^
+../../../../src/main/cpp/DZFFmpeg.cpp:165:69: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
+                                                                    ^
+5 warnings generated.
+[4/5] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o
+[5/5] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libmusic-player.so

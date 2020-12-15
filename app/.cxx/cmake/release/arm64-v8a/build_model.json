@@ -199,7 +199,6 @@
     "objFolder": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/build/intermediates/cmake/release/obj",
     "variantName": "release",
     "validAbiList": [
-      "ARMEABI_V7A",
       "ARM64_V8A"
     ],
     "prefabDirectory": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/prefab",

@@ -16,24 +16,17 @@ DZFFmpeg::~DZFFmpeg() {
     release();
 }
 
-void *threadPlay(void *context) {
-    DZFFmpeg * pFFmpeg = (DZFFmpeg *) context;
-    pFFmpeg->prepare(THREAD_CHILD);
-    return 0;
-}
-
 void DZFFmpeg::play() {
-    // 创建一个线程去播放，多线程编解码边播放
-    pthread_t playThreadT;
-    pthread_create(&playThreadT, NULL, threadPlay, this);
-    pthread_detach(playThreadT);
+    if (pAudio != NULL) {
+        pAudio->play();
+    }
 }
 
-void DZFFmpeg::callPlayerJniError(ThreadMode threadMode,int code, char *msg) {
+void DZFFmpeg::callPlayerJniError(ThreadMode threadMode, int code, char *msg) {
     // 释放资源
     release();
     // 回调给 java 层调用
-    pJniCall->callPlayerError(threadMode,code, msg);
+    pJniCall->callPlayerError(threadMode, code, msg);
 }
 
 void DZFFmpeg::release() {
@@ -55,14 +48,17 @@ void DZFFmpeg::release() {
         swrContext = NULL;
     }
 
-    if (resampleOutBuffer != NULL) {
-        free(resampleOutBuffer);
-        resampleOutBuffer = NULL;
-    }
-
     avformat_network_deinit();
+
+    if (url != NULL) {
+        free(url);
+        url = NULL;
+    }
 }
 
+void DZFFmpeg::prepare() {
+    prepare(THREAD_MAIN);
+}
 
 void *threadPrepare(void *context) {
     DZFFmpeg *pFFmpeg = (DZFFmpeg *) context;
@@ -102,14 +98,14 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
         LOGE("format find stream info error: %s", av_err2str(formatFindStreamInfoRes));
         // 这种方式一般不推荐这么写，但是的确方便
         callPlayerJniError(threadMode, formatFindStreamInfoRes,
-                           av_err2str(formatFindStreamInfoRes));
+                av_err2str(formatFindStreamInfoRes));
         return;
     }
 
     // 查找音频流的 index
     int audioStramIndex = av_find_best_stream(pFormatContext, AVMediaType::AVMEDIA_TYPE_AUDIO, -1,
-                                              -1,
-                                              NULL, 0);
+            -1,
+            NULL, 0);
     if (audioStramIndex < 0) {
         LOGE("format audio stream error.");
         // 这种方式一般不推荐这么写，但是的确方便
@@ -124,7 +120,7 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
         LOGE("codec find audio decoder error");
         // 这种方式一般不推荐这么写，但是的确方便
         callPlayerJniError(threadMode, CODEC_FIND_DECODER_ERROR_CODE,
-                           "codec find audio decoder error");
+                "codec find audio decoder error");
         return;
     }
     // 打开解码器
@@ -139,7 +135,7 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
     if (codecParametersToContextRes < 0) {
         LOGE("codec parameters to context error: %s", av_err2str(codecParametersToContextRes));
         callPlayerJniError(threadMode, codecParametersToContextRes,
-                           av_err2str(codecParametersToContextRes));
+                av_err2str(codecParametersToContextRes));
         return;
     }
 
@@ -158,7 +154,7 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
     enum AVSampleFormat in_sample_fmt = pCodecContext->sample_fmt;
     int in_sample_rate = pCodecContext->sample_rate;
     swrContext = swr_alloc_set_opts(NULL, out_ch_layout, out_sample_fmt,
-                                    out_sample_rate, in_ch_layout, in_sample_fmt, in_sample_rate, 0, NULL);
+            out_sample_rate, in_ch_layout, in_sample_fmt, in_sample_rate, 0, NULL);
     if (swrContext == NULL) {
         // 提示错误
         callPlayerJniError(threadMode, SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
@@ -169,7 +165,7 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
         callPlayerJniError(threadMode, SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
         return;
     }
-//    pAudio = new DZAudio(audioStramIndex, pJniCall, pCodecContext, pFormatContext);
+    pAudio = new DZAudio(audioStramIndex, pJniCall, pCodecContext, pFormatContext);
     // ---------- 重采样 end ----------
     // 回调到 Java 告诉他准备好了
 }

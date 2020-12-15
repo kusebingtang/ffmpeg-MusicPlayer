@@ -26,6 +26,11 @@
           "workingDirectoryOrdinal": 0
         },
         {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZAudio.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
           "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZJNICall.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0

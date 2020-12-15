@@ -220,7 +220,7 @@ Project_BINARY_DIR:STATIC=/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPl
 Project_SOURCE_DIR:STATIC=/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app
 
 //Dependencies for the target
-music-player_LIB_DEPENDS:STATIC=general;avcodec;general;avdevice;general;avfilter;general;avformat;general;avutil;general;postproc;general;swresample;general;swscale;general;x264;general;android;general;log;
+music-player_LIB_DEPENDS:STATIC=general;avcodec;general;avdevice;general;avfilter;general;avformat;general;avutil;general;postproc;general;swresample;general;swscale;general;x264;general;android;general;OpenSLES;general;log;
 
 
 ########################

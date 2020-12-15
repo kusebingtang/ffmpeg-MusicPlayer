@@ -12,7 +12,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-fexceptions"
-                abiFilters  "armeabi-v7a", "arm64-v8a"
+                abiFilters  "arm64-v8a"
             }
         }
         ndkVersion "21.3.6528147"

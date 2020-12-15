@@ -63,6 +63,13 @@ build CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o: CXX_COMPILER__mus
   INCLUDES = -I../../../../src/main/jniLibs/include
   OBJECT_DIR = CMakeFiles/music-player.dir
   OBJECT_FILE_DIR = CMakeFiles/music-player.dir/src/main/cpp
+build CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o: CXX_COMPILER__music-player ../../../../src/main/cpp/DZAudio.cpp || cmake_object_order_depends_target_music-player
+  DEFINES = -Dmusic_player_EXPORTS
+  DEP_FILE = CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o.d
+  FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fexceptions -O0 -fno-limit-debug-info  -fPIC
+  INCLUDES = -I../../../../src/main/jniLibs/include
+  OBJECT_DIR = CMakeFiles/music-player.dir
+  OBJECT_FILE_DIR = CMakeFiles/music-player.dir/src/main/cpp
 build CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o: CXX_COMPILER__music-player ../../../../src/main/cpp/DZJNICall.cpp || cmake_object_order_depends_target_music-player
   DEFINES = -Dmusic_player_EXPORTS
   DEP_FILE = CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o.d
@@ -85,10 +92,10 @@ build CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o: CXX_COMPILER_
 #############################################
 # Link the shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so
 
-build ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so: CXX_SHARED_LIBRARY_LINKER__music-player CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o
+build ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so: CXX_SHARED_LIBRARY_LINKER__music-player CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o
   LANGUAGE_COMPILE_FLAGS = -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -fexceptions -O0 -fno-limit-debug-info
   LINK_FLAGS = -Wl,--exclude-libs,libgcc.a -Wl,--exclude-libs,libgcc_real.a -Wl,--exclude-libs,libatomic.a -static-libstdc++ -Wl,--build-id -Wl,--fatal-warnings -Wl,--no-undefined -Qunused-arguments
-  LINK_LIBRARIES = -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswresample -lswscale -lx264 -landroid -llog -latomic -lm
+  LINK_LIBRARIES = -lavcodec -lavdevice -lavfilter -lavformat -lavutil -lpostproc -lswresample -lswscale -lx264 -landroid -lOpenSLES -llog -latomic -lm
   LINK_PATH = -L/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/jniLibs/arm64-v8a
   OBJECT_DIR = CMakeFiles/music-player.dir
   POST_BUILD = :
