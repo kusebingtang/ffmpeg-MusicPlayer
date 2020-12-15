@@ -27,7 +27,7 @@ extern "C" JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *javaVM, void *reserved) {
 
 extern "C" JNIEXPORT void JNICALL
 Java_com_darren_media_DarrenPlayer_nPlay(JNIEnv *env, jobject instance) {
-    if (pFFmpeg == NULL) {
+    if (pFFmpeg != NULL) {
         pFFmpeg->play();
     }
 }

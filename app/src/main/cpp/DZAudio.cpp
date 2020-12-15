@@ -5,12 +5,15 @@
 
 
 DZAudio::DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVCodecContext *pCodecContext,
-        AVFormatContext *pFormatContext) {
-    this->audioStreamIndex =audioStreamIndex;
+                 AVFormatContext *pFormatContext, SwrContext *swrContext) {
+    this->audioStreamIndex = audioStreamIndex;
     this->pJniCall = pJniCall;
     this->pCodecContext = pCodecContext;
     this->pFormatContext = pFormatContext;
+    this->swrContext = swrContext;
+    resampleOutBuffer = (uint8_t *) malloc(pCodecContext->frame_size * 2 * 2);
 }
+
 void *threadPlay(void *context) {
     DZAudio *pFFmpeg = (DZAudio *) context;
     pFFmpeg->initCrateOpenSLES();
@@ -41,7 +44,7 @@ int DZAudio::resampleAudio() {
 
                     // 调用重采样的方法
                     dataSize = swr_convert(swrContext, &resampleOutBuffer, pFrame->nb_samples,
-                            (const uint8_t **) pFrame->data, pFrame->nb_samples);
+                                           (const uint8_t **) pFrame->data, pFrame->nb_samples);
                     LOGE("解码音频帧");
                     // write 写到缓冲区 pFrame.data -> javabyte
                     // size 是多大，装 pcm 的数据
@@ -118,7 +121,7 @@ void DZAudio::initCrateOpenSLES() {
     // 3.4 设置缓存队列和回调函数
     SLAndroidSimpleBufferQueueItf playerBufferQueue;
     (*pPlayer)->GetInterface(pPlayer, SL_IID_BUFFERQUEUE, &playerBufferQueue);
-    (*playerBufferQueue)->RegisterCallback(playerBufferQueue, playerCallback, NULL);
+    (*playerBufferQueue)->RegisterCallback(playerBufferQueue, playerCallback, this);
     // 3.5 设置播放状态
     (*pPlayItf)->SetPlayState(pPlayItf, SL_PLAYSTATE_PLAYING);
     // 3.6 调用回调函数

@@ -165,7 +165,7 @@ void DZFFmpeg::prepare(ThreadMode threadMode) {
         callPlayerJniError(threadMode, SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
         return;
     }
-    pAudio = new DZAudio(audioStramIndex, pJniCall, pCodecContext, pFormatContext);
+    pAudio = new DZAudio(audioStramIndex, pJniCall, pCodecContext, pFormatContext, swrContext);
     // ---------- 重采样 end ----------
     // 回调到 Java 告诉他准备好了
 }

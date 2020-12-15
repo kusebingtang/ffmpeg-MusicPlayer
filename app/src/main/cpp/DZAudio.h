@@ -26,7 +26,7 @@ public:
     int audioStreamIndex = -1;
 public:
     DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVCodecContext *pCodecContext,
-            AVFormatContext *pFormatContext);
+            AVFormatContext *pFormatContext, SwrContext *swrContext);
 
     void play();
 
