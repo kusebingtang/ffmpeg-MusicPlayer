@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/CMakeLists.txt",
+    "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake",
+    "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "music-player-Release-x86_64": {
+      "artifactName": "music-player",
+      "buildCommand": "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/release/x86_64\" music-player",
+      "abi": "x86_64",
+      "output": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/build/intermediates/cmake/release/obj/x86_64/libmusic-player.so",
+      "runtimeFiles": []
+    }
+  }
+}

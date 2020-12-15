@@ -1,0 +1,53 @@
+{
+  "stringTable": {
+    "0": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/x86",
+    "1": "--target=i686-none-linux-android16 --gcc-toolchain=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64 --sysroot=/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Dmusic_player_EXPORTS -I../../../../src/main/jniLibs/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -fexceptions -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/CMakeLists.txt",
+    "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake",
+    "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "music-player-Debug-x86": {
+      "buildCommand": "/Users/zyh/Library/Android/sdk/cmake/3.10.2.4988404/bin/ninja -C \"/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/x86\" music-player",
+      "buildType": "debug",
+      "toolchain": "2153680687",
+      "abi": "x86",
+      "artifactName": "music-player",
+      "files": [
+        {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZFFmpeg.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZJNICall.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/music-player.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/build/intermediates/cmake/debug/obj/x86/libmusic-player.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "2153680687": {
+      "cppCompilerExecutable": "/Users/zyh/Library/Android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

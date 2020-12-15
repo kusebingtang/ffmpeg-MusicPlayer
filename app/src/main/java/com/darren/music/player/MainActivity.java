@@ -34,6 +34,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mPlayer.play();
+//        mPlayer.play();
     }
 }

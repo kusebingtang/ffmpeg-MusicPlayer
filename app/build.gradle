@@ -5,16 +5,17 @@ android {
     defaultConfig {
         applicationId "com.darren.music.player"
         minSdkVersion 15
-        targetSdkVersion 20
+        targetSdkVersion 19
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
                 cppFlags "-fexceptions"
-                abiFilters "armeabi"
+                abiFilters  "armeabi-v7a", "arm64-v8a"
             }
         }
+        ndkVersion "21.3.6528147"
     }
     buildTypes {
         release {

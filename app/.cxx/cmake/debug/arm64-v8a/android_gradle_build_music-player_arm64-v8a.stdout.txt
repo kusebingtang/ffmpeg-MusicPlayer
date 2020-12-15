@@ -1,0 +1,27 @@
+ninja: Entering directory `/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/arm64-v8a'
+[1/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o
+[2/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o
+[3/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o
+../../../../src/main/cpp/DZFFmpeg.cpp:100:43: warning: more '%' conversions than data arguments [-Wformat]
+        LOGE("format audio stream error: %s");
+                                         ~^
+../../../../src/main/cpp/DZConstDefine.h:11:61: note: expanded from macro 'LOGE'
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR,TAG,__VA_ARGS__)
+                                                            ^~~~~~~~~~~
+../../../../src/main/cpp/DZFFmpeg.cpp:102:52: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(FIND_STREAM_ERROR_CODE, "format audio stream error");
+                                                   ^
+../../../../src/main/cpp/DZFFmpeg.cpp:112:59: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(CODEC_FIND_DECODER_ERROR_CODE, "codec find audio decoder error");
+                                                          ^
+../../../../src/main/cpp/DZFFmpeg.cpp:120:60: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(CODEC_ALLOC_CONTEXT_ERROR_CODE, "codec alloc context error");
+                                                           ^
+../../../../src/main/cpp/DZFFmpeg.cpp:148:59: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
+                                                          ^
+../../../../src/main/cpp/DZFFmpeg.cpp:153:57: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
+                                                        ^
+6 warnings generated.
+[4/4] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so

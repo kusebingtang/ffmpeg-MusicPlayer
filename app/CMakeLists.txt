@@ -13,7 +13,10 @@ include_directories(src/main/jniLibs/include)
 # Gradle automatically packages shared libraries with your APK.
 
 # 添加共享库搜索路径
-LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi)
+#LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/main/jniLibs/arm64-v8a)
+LINK_DIRECTORIES(${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}
+        )
+
 
 # 指定源文件目录
 AUX_SOURCE_DIRECTORY(${CMAKE_SOURCE_DIR}/src/main/cpp SRC_LIST)
@@ -37,21 +40,23 @@ target_link_libraries( # Specifies the target library.
         # 链接额外的 ffmpeg 的编译
         music-player
         # 编解码(最重要的库)
-        avcodec-57
+        avcodec
         # 设备信息
-        avdevice-57
+        avdevice
         # 滤镜特效处理库
-        avfilter-6
+        avfilter
         # 封装格式处理库
-        avformat-57
+        avformat
         # 工具库(大部分库都需要这个库的支持)
-        avutil-55
+        avutil
         # 后期处理
-        postproc-54
+        postproc
         # 音频采样数据格式转换库
-        swresample-2
+        swresample
         # 视频像素数据格式转换
-        swscale-4
+        swscale
+        # 264
+        x264
         # 链接 android ndk 自带的一些库
         android
         # Links the target library to the log library
