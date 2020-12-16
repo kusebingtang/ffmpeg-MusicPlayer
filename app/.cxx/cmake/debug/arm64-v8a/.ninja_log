@@ -1,0 +1,11 @@
+# ninja log v5
+2	2936	1608107331	CMakeFiles/music-player.dir/src/main/cpp/DZJNICall.cpp.o	bfe95715d2d3ac0f
+3	3275	1608107331	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
+1	3276	1608107331	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+1	3277	1608107331	CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o	e9d2337851a758fd
+0	3666	1608107332	CMakeFiles/music-player.dir/src/main/cpp/DZPacketQueue.cpp.o	2fbc1be53f535703
+3666	4805	1608107333	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	9dd18ac66243dde1
+3	477	1608108533	CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o	5fddfa71d36f072
+2	486	1608108533	CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o	e9d2337851a758fd
+1	508	1608108533	CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o	bdbda77ab0b52266
+508	599	1608108533	../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so	9dd18ac66243dde1

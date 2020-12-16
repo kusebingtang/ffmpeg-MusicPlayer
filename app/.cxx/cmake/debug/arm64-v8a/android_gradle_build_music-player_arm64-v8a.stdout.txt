@@ -1,0 +1,25 @@
+ninja: Entering directory `/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/.cxx/cmake/debug/arm64-v8a'
+[1/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/music-player.cpp.o
+[2/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZFFmpeg.cpp.o
+../../../../src/main/cpp/DZFFmpeg.cpp:112:64: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, FIND_STREAM_ERROR_CODE, "format audio stream error");
+                                                               ^
+../../../../src/main/cpp/DZFFmpeg.cpp:123:17: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+                "codec find audio decoder error");
+                ^
+../../../../src/main/cpp/DZFFmpeg.cpp:131:72: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, CODEC_ALLOC_CONTEXT_ERROR_CODE, "codec alloc context error");
+                                                                       ^
+../../../../src/main/cpp/DZFFmpeg.cpp:160:71: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
+                                                                      ^
+../../../../src/main/cpp/DZFFmpeg.cpp:165:69: warning: ISO C++11 does not allow conversion from string literal to 'char *' [-Wwritable-strings]
+        callPlayerJniError(threadMode, SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
+                                                                    ^
+5 warnings generated.
+[3/4] Building CXX object CMakeFiles/music-player.dir/src/main/cpp/DZAudio.cpp.o
+../../../../src/main/cpp/DZAudio.cpp:43:1: warning: control reaches end of non-void function [-Wreturn-type]
+}
+^
+1 warning generated.
+[4/4] Linking CXX shared library ../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libmusic-player.so

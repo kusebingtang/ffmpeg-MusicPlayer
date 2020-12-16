@@ -21,7 +21,7 @@
       "artifactName": "music-player",
       "files": [
         {
-          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZFFmpeg.cpp",
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZPacketQueue.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },
@@ -31,7 +31,17 @@
           "workingDirectoryOrdinal": 0
         },
         {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZFFmpeg.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
           "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZJNICall.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/Users/zyh/Documents/edu_vip/Darren/NDK/ffmpeg/MusicPlayer/app/src/main/cpp/DZPlayerStatus.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         },

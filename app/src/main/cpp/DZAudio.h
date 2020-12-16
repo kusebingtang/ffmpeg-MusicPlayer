@@ -7,6 +7,8 @@
 #include <pthread.h>
 #include "DZJNICall.h"
 #include "DZConstDefine.h"
+#include "DZPacketQueue.h"
+#include "DZPlayerStatus.h"
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>
 
@@ -24,15 +26,21 @@ public:
     uint8_t *resampleOutBuffer = NULL;
     DZJNICall *pJniCall = NULL;
     int audioStreamIndex = -1;
+    DZPacketQueue *pPacketQueue = NULL;
+    DZPlayerStatus *pPlayerStatus = NULL;
 public:
     DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVCodecContext *pCodecContext,
             AVFormatContext *pFormatContext, SwrContext *swrContext);
+
+    ~DZAudio();
 
     void play();
 
     void initCrateOpenSLES();
 
     int resampleAudio();
+
+    void release();
 };
 
 

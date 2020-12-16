@@ -12,16 +12,43 @@ DZAudio::DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVCodecContext *pCod
     this->pFormatContext = pFormatContext;
     this->swrContext = swrContext;
     resampleOutBuffer = (uint8_t *) malloc(pCodecContext->frame_size * 2 * 2);
+    pPacketQueue = new DZPacketQueue();
+    pPlayerStatus = new DZPlayerStatus();
 }
 
 void *threadPlay(void *context) {
-    DZAudio *pFFmpeg = (DZAudio *) context;
-    pFFmpeg->initCrateOpenSLES();
+    DZAudio *pAudio = (DZAudio *) context;
+    pAudio->initCrateOpenSLES();
     return 0;
 }
 
+void *threadReadPacket(void *context) {
+    DZAudio *pAudio = (DZAudio *) context;
+    while (pAudio->pPlayerStatus != NULL && !pAudio->pPlayerStatus->isExit) {
+        AVPacket *pAvPacket = av_packet_alloc();
+        if (av_read_frame(pAudio->pFormatContext, pAvPacket) >= 0) {
+            if (pAvPacket->stream_index == pAudio->audioStreamIndex) {
+                pAudio->pPacketQueue->push(pAvPacket);
+            } else {
+                // 1. 解引用数据 data ， 2. 销毁 pPacket 结构体内存  3. pPacket = NULL
+                av_packet_free(&pAvPacket);
+            }
+        } else {
+            // 1. 解引用数据 data ， 2. 销毁 pPacket 结构体内存  3. pPacket = NULL
+            av_packet_free(&pAvPacket);
+            // 睡眠一下，尽量不去消耗 cpu 的资源，也可以退出销毁这个线程
+            // break;
+        }
+    }
+}
+
 void DZAudio::play() {
-    // 创建一个线程去播放，多线程编解码边播放
+    // 一个线程去读取 Packet
+    pthread_t readPacketThreadT;
+    pthread_create(&readPacketThreadT, NULL, threadReadPacket, this);
+    pthread_detach(readPacketThreadT);
+
+    // 一个线程去解码播放
     pthread_t playThreadT;
     pthread_create(&playThreadT, NULL, threadPlay, this);
     pthread_detach(playThreadT);
@@ -29,30 +56,26 @@ void DZAudio::play() {
 
 int DZAudio::resampleAudio() {
     int dataSize = 0;
-    AVPacket *pPacket = av_packet_alloc();
+    AVPacket *pPacket = NULL;
     AVFrame *pFrame = av_frame_alloc();
 
-    while (av_read_frame(pFormatContext, pPacket) >= 0) {
-        if (pPacket->stream_index == audioStreamIndex) {
-            // Packet 包，压缩的数据，解码成 pcm 数据
-            int codecSendPacketRes = avcodec_send_packet(pCodecContext, pPacket);
-            if (codecSendPacketRes == 0) {
-                int codecReceiveFrameRes = avcodec_receive_frame(pCodecContext, pFrame);
-                if (codecReceiveFrameRes == 0) {
-                    // AVPacket -> AVFrame
-                    LOGE("解码音频帧");
-
-                    // 调用重采样的方法
-                    dataSize = swr_convert(swrContext, &resampleOutBuffer, pFrame->nb_samples,
-                                           (const uint8_t **) pFrame->data, pFrame->nb_samples);
-                    dataSize = dataSize * 2 * 2;
-                    LOGE("解码音频帧");
-                    // write 写到缓冲区 pFrame.data -> javabyte
-                    // size 是多大，装 pcm 的数据
-                    // 1s 44100 点  2通道 ，2字节    44100*2*2
-                    // 1帧不是一秒，pFrame->nb_samples点
-                    break;
-                }
+    while (pPlayerStatus != NULL && !pPlayerStatus->isExit) {
+        pPacket = pPacketQueue->pop();
+        // Packet 包，压缩的数据，解码成 pcm 数据
+        int codecSendPacketRes = avcodec_send_packet(pCodecContext, pPacket);
+        if (codecSendPacketRes == 0) {
+            int codecReceiveFrameRes = avcodec_receive_frame(pCodecContext, pFrame);
+            if (codecReceiveFrameRes == 0) {
+                // AVPacket -> AVFrame
+                // 调用重采样的方法，返回值是返回重采样的个数，也就是 pFrame->nb_samples
+                dataSize = swr_convert(swrContext, &resampleOutBuffer, pFrame->nb_samples,
+                                       (const uint8_t **) pFrame->data, pFrame->nb_samples);
+                dataSize = dataSize * 2 * 2;
+                // write 写到缓冲区 pFrame.data -> javabyte
+                // size 是多大，装 pcm 的数据
+                // 1s 44100 点  2通道 ，2字节    44100*2*2
+                // 1帧不是一秒，pFrame->nb_samples点
+                break;
             }
         }
         // 解引用
@@ -128,3 +151,28 @@ void DZAudio::initCrateOpenSLES() {
     // 3.6 调用回调函数
     playerCallback(playerBufferQueue, this);
 }
+
+DZAudio::~DZAudio() {
+    release();
+}
+
+void DZAudio::release() {
+    if (pPacketQueue) {
+        delete (pPacketQueue);
+        pPacketQueue = nullptr;
+    }
+    if (resampleOutBuffer) {
+        free(resampleOutBuffer);
+        resampleOutBuffer = nullptr;
+    }
+    if (pPlayerStatus) {
+        delete (pPlayerStatus);
+        pPlayerStatus = nullptr;
+    }
+    if (pCodecContext != nullptr) {
+        avcodec_close(pCodecContext);
+        avcodec_free_context(&pCodecContext);
+        pCodecContext = nullptr;
+    }
+}
+
