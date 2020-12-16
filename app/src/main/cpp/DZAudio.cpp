@@ -4,14 +4,10 @@
 #include "DZAudio.h"
 
 
-DZAudio::DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVCodecContext *pCodecContext,
-                 AVFormatContext *pFormatContext, SwrContext *swrContext) {
+DZAudio::DZAudio(int audioStreamIndex, DZJNICall *pJniCall, AVFormatContext *pFormatContext) {
     this->audioStreamIndex = audioStreamIndex;
     this->pJniCall = pJniCall;
-    this->pCodecContext = pCodecContext;
     this->pFormatContext = pFormatContext;
-    this->swrContext = swrContext;
-    resampleOutBuffer = (uint8_t *) malloc(pCodecContext->frame_size * 2 * 2);
     pPacketQueue = new DZPacketQueue();
     pPlayerStatus = new DZPlayerStatus();
 }
@@ -68,7 +64,7 @@ int DZAudio::resampleAudio() {
             if (codecReceiveFrameRes == 0) {
                 // AVPacket -> AVFrame
                 // 调用重采样的方法，返回值是返回重采样的个数，也就是 pFrame->nb_samples
-                dataSize = swr_convert(swrContext, &resampleOutBuffer, pFrame->nb_samples,
+                dataSize = swr_convert(pSwrContext, &resampleOutBuffer, pFrame->nb_samples,
                                        (const uint8_t **) pFrame->data, pFrame->nb_samples);
                 dataSize = dataSize * 2 * 2;
                 // write 写到缓冲区 pFrame.data -> javabyte
@@ -89,10 +85,10 @@ int DZAudio::resampleAudio() {
 }
 
 void playerCallback(SLAndroidSimpleBufferQueueItf caller, void *pContext) {
-    DZAudio *pFFmepg = (DZAudio *) pContext;
-    int dataSize = pFFmepg->resampleAudio();
+    DZAudio *pAudio = (DZAudio *) pContext;
+    int dataSize = pAudio->resampleAudio();
     // 这里为什么报错，留在后面再去解决
-    (*caller)->Enqueue(caller, pFFmepg->resampleOutBuffer, dataSize);
+    (*caller)->Enqueue(caller, pAudio->resampleOutBuffer, dataSize);
 }
 
 void DZAudio::initCrateOpenSLES() {
@@ -152,6 +148,71 @@ void DZAudio::initCrateOpenSLES() {
     playerCallback(playerBufferQueue, this);
 }
 
+void DZAudio::callPlayerJniError(ThreadMode threadMode, int code, char *msg) {
+    // 释放资源
+    release();
+    // 回调给 java 层调用
+    pJniCall->callPlayerError(threadMode, code, msg);
+}
+
+
+void DZAudio::analysisStream(ThreadMode threadMode, AVStream **streams) {
+    // 查找解码
+    AVCodecParameters *pCodecParameters = pFormatContext->streams[audioStreamIndex]->codecpar;
+    AVCodec *pCodec = avcodec_find_decoder(pCodecParameters->codec_id);
+    if (pCodec == nullptr) {
+        LOGE("codec find audio decoder error");
+        callPlayerJniError(threadMode, CODEC_FIND_DECODER_ERROR_CODE,
+                           "codec find audio decoder error");
+        return;
+    }
+    // 打开解码器
+    pCodecContext = avcodec_alloc_context3(pCodec);
+    if (pCodecContext == nullptr) {
+        LOGE("codec alloc context error");
+        callPlayerJniError(threadMode, CODEC_ALLOC_CONTEXT_ERROR_CODE, "codec alloc context error");
+        return;
+    }
+    int codecParametersToContextRes = avcodec_parameters_to_context(pCodecContext,
+                                                                    pCodecParameters);
+    if (codecParametersToContextRes < 0) {
+        LOGE("codec parameters to context error: %s", av_err2str(codecParametersToContextRes));
+        callPlayerJniError(threadMode, codecParametersToContextRes,
+                           av_err2str(codecParametersToContextRes));
+        return;
+    }
+
+    int codecOpenRes = avcodec_open2(pCodecContext, pCodec, NULL);
+    if (codecOpenRes != 0) {
+        LOGE("codec audio open error: %s", av_err2str(codecOpenRes));
+        callPlayerJniError(threadMode, codecOpenRes, av_err2str(codecOpenRes));
+        return;
+    }
+
+    // ---------- 重采样 start ----------
+    int64_t out_ch_layout = AV_CH_LAYOUT_STEREO;
+    enum AVSampleFormat out_sample_fmt = AVSampleFormat::AV_SAMPLE_FMT_S16;
+    int out_sample_rate = AUDIO_SAMPLE_RATE;
+    int64_t in_ch_layout = pCodecContext->channel_layout;
+    enum AVSampleFormat in_sample_fmt = pCodecContext->sample_fmt;
+    int in_sample_rate = pCodecContext->sample_rate;
+    pSwrContext = swr_alloc_set_opts(NULL, out_ch_layout, out_sample_fmt,
+                                     out_sample_rate, in_ch_layout, in_sample_fmt, in_sample_rate, 0, NULL);
+    if (pSwrContext == nullptr) {
+        // 提示错误
+        callPlayerJniError(threadMode, SWR_ALLOC_SET_OPTS_ERROR_CODE, "swr alloc set opts error");
+        return;
+    }
+    int swrInitRes = swr_init(pSwrContext);
+    if (swrInitRes < 0) {
+        callPlayerJniError(threadMode, SWR_CONTEXT_INIT_ERROR_CODE, "swr context swr init error");
+        return;
+    }
+
+    resampleOutBuffer = (uint8_t *) malloc(pCodecContext->frame_size * 2 * 2);
+    // ---------- 重采样 end ----------
+}
+
 DZAudio::~DZAudio() {
     release();
 }
@@ -173,6 +234,11 @@ void DZAudio::release() {
         avcodec_close(pCodecContext);
         avcodec_free_context(&pCodecContext);
         pCodecContext = nullptr;
+    }
+    if (pSwrContext != nullptr) {
+        swr_free(&pSwrContext);
+        free(pSwrContext);
+        pSwrContext = nullptr;
     }
 }
 
